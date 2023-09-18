@@ -223,11 +223,10 @@ DefaultTableModel modelo2 = new DefaultTableModel();
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSuperior)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSuperior))
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -245,9 +244,9 @@ DefaultTableModel modelo2 = new DefaultTableModel();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnInferior)
-                            .addComponent(btnSuperior, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSuperior)
+                            .addComponent(btnInferior))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -294,6 +293,21 @@ DefaultTableModel modelo2 = new DefaultTableModel();
             
            //Agregar nummeros
            
+        int ceros = 1;
+        int numeros = n - 1;
+        
+        for (int fila = 0; fila < n; fila++) {
+            for (int columnaEspacios = 0; columnaEspacios < numeros; columnaEspacios++)  {
+                
+            }
+            for (int columnaAsteriscos = 0; columnaAsteriscos < ceros; columnaAsteriscos++) {
+                jTable1.setValueAt("0", columnaAsteriscos, fila);
+            }
+         
+            ceros ++;
+            numeros --;
+        }
+           
         int asteriscos = 1;
         int espacios = n - 1;
         
@@ -302,7 +316,7 @@ DefaultTableModel modelo2 = new DefaultTableModel();
                 
             }
             for (int columnaAsteriscos = 0; columnaAsteriscos < asteriscos; columnaAsteriscos++) {
-                jTable1.setValueAt("N", fila, columnaAsteriscos);
+                jTable1.setValueAt(" ", fila, columnaAsteriscos);
             }
          
             asteriscos ++;
@@ -337,19 +351,32 @@ DefaultTableModel modelo2 = new DefaultTableModel();
             
            //Agregar nummeros
            
-        int asteriscos = 1;
-        int espacios = n - 1;
+      int asteriscos = n- 1;
+        int espacios = 1;
         
         for (int fila = 0; fila < n; fila++) {
             for (int columnaEspacios = 0; columnaEspacios < espacios; columnaEspacios++)  {
                 
             }
             for (int columnaAsteriscos = 0; columnaAsteriscos < asteriscos; columnaAsteriscos++) {
-                jTable2.setValueAt("T", columnaAsteriscos, fila);
+                jTable2.setValueAt("0", fila, columnaAsteriscos);
+            }
+        }
+        
+        
+        int numeros = 1;
+        int ceross = n - 1;
+        
+        for (int fila = 0; fila < n; fila++) {
+            for (int columnaEspacios = 0; columnaEspacios < ceross; columnaEspacios++)  {
+                
+            }
+            for (int columnaAsteriscos = 0; columnaAsteriscos < numeros; columnaAsteriscos++) {
+                jTable2.setValueAt(" ", columnaAsteriscos, fila);
             }
          
-            asteriscos ++;
-            espacios --;
+            numeros ++;
+            ceross --;
         }
             
         } catch (Exception e) {
@@ -361,24 +388,23 @@ DefaultTableModel modelo2 = new DefaultTableModel();
     }//GEN-LAST:event_btnSuperiorActionPerformed
 
     private void btnUnirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnirActionPerformed
-        
-      
-        String[][] matrizUnida = new String[n][n];
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < i; j++) {
-                matrizUnida[i][j] = ((String)jTable2.getValueAt(i, j)) + " " +((String)jTable1.getValueAt(i, j));
-            }
+ 
+         String [][] matrizFinal = new String[n][n+1];
+         String apuntador = new String();
+         
+         for (int i = 0; i < n; i++) {
+             for (int j = 0; j < n+1; j++) {
+                 apuntador = (String)jTable1.getValueAt(i, j);
+                 matrizFinal [i][j] = apuntador;
+                 
+                 if (apuntador == "0") {
+                      apuntador = (String)jTable2.getValueAt(i, j);
+                      matrizFinal [i][j+1] = apuntador;
+                 }
+             }
         }
-
-        // Imprimir la matriz unida
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(matrizUnida[i][j] + " ");
-            }
-            System.out.println();
-        }
-        
+         
+         System.out.println(matrizFinal);
     }//GEN-LAST:event_btnUnirActionPerformed
 
     
